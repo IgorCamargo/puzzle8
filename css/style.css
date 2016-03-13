@@ -1,0 +1,91 @@
+body {
+	font: 13px Verdana;
+}
+h1 {
+	margin-bottom: 0;
+	font: 29px "arial black";
+}
+h3 {
+	margin-top: 0;
+	font: bold italic 18px arial;
+}
+#container {
+  width: 800px;
+  margin: auto;
+}
+#quadroesq {
+  float: left;
+  width: 400px;
+}
+#quadrodir {
+  float: left;
+  width: 400px;
+}
+#tabuleiro {
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: inset;
+	border-color: gray;
+	border-collapse: separate;
+}
+#tabuleiro td {
+	padding-right: 5px;
+	width: 95px;
+	height: 100px;
+	font: 15px "arial black";
+	color: #fff;
+	text-align: right;
+	vertical-align: bottom;
+	background-image: url(../img/cac2.jpg);
+	background-repeat: no-repeat;
+}
+.c1,.c2,.c3,.c4,.c5,.c6,.c7,.c8 {
+	border-width: 1px;
+	border-color: gray;
+	border-style: outset;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+}
+.c1 {
+	background-position: 0 0;
+}
+.c2 {
+	background-position: -105px 0;
+}
+.c3 {
+	background-position: -210px 0;
+}
+.c4 {
+	background-position: 0 -105px;
+}
+.c5 {
+	background-position: -105px -105px;
+}
+.c6 {
+	background-position: -210px -105px;
+}
+.c7 {
+	background-position: 0 -210px;
+}
+.c8 {
+	background-position: -105px -210px;
+}
+.c9 {
+	background-position: 5000px 5000px;
+	border-style: none;
+}
+.hint {
+	font: 11px Tahoma,Helvetica,Arial;
+	line-height: 18px;
+	padding: 10px;
+	border: 1px solid #000;
+	background-color: #ffe;
+	width: 300px;
+	height: auto;
+	margin-top: 10px;
+	position: absolute;
+}
+.info {
+	font: 11px Tahoma,Helvetica,Arial;
+	margin: 10px 0 20px 30px;
+	text-indent: -30px;
+}
