@@ -9,12 +9,13 @@
 
 <body onLoad="exibeEstado(estado);">
 
-	<h1>8-puzzle - Fundamentos de IA</h1>
-	<h3>Um exercício com algoritmos de busca cega e heurística</h3>
+	<h1>Puzzle 8</h1>
+	<!-- <h1>8-puzzle - Fundamentos de IA</h1> -->
+	<!-- <h3>Um exercício com algoritmos de busca cega e heurística</h3> -->
 
 	<div id="container">
 
-		<div id="quadroesq">
+		<div id="tabuleiro-puzzle">
 			<table id="tabuleiro">
 				<tr>
 					<td id="p00" onClick="movePeca(this);"></td>
@@ -34,7 +35,7 @@
 			</table>
 		</div>
 
-		<div id="quadrodir">
+		<div id="quadroesq">
 			<form>
 				<input type="button" id="embaralha" value="Embaralha tabuleiro" onClick="embaralhaTabuleiro(estado,50,'');" onMouseOver="hints('hintEmbaralha');" onMouseOut="hints();">
 
