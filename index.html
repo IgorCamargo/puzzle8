@@ -14,15 +14,15 @@
 	<h3>Algoritmo A*</h3>
 
 	<div class="pos-esq">
-		<input class="but but-faccat" type="button" id="embaralha" value="Embaralha tabuleiro" onClick="embaralhaTabuleiro(estado,50,'');" onMouseOver="hints('hintEmbaralha');" onMouseOut="hints();">
-		<input class="but but-faccat" type="button" id="restaura" value="Restaura tabuleiro " onClick="restauraUltimo();" onMouseOver="hints('hintRestaura');" onMouseOut="hints();">
-		<input class="but but-faccat" type="button" id="busca" value="Busca solução " onClick="buscaSolucao('A2');" onMouseOver="hints('hintBusca');" onMouseOut="hints();">
+		<input class="but but-faccat" type="button" id="embaralha" value="Embaralha tabuleiro" onClick="embaralhaTabuleiro(estado,50,'');">
+		<input class="but but-faccat" type="button" id="restaura" value="Restaura tabuleiro " onClick="restauraUltimo();">
+		<input class="but but-faccat" type="button" id="busca" value="Busca solução " onClick="buscaSolucao('A2');">
 	</div>
 		
-	<div class="pos-dir" onMouseOver="hints('hintCasos');" onMouseOut="hints();">
-		<input class="but but-faccat" type="button" id="caso1" value=" Caso Teste 1" onClick="casosTeste(1);">
-		<input class="but but-faccat" type="button" id="caso2" value=" Caso Teste 2" onClick="casosTeste(2);">
-		<input class="but but-faccat" type="button" id="caso3" value=" Caso Teste 3" onClick="casosTeste(3);">
+	<div class="pos-dir">
+		<input class="but but-faccat" type="button" id="caso1" value="Profundidade 11" onClick="casosTeste(1);">
+		<input class="but but-faccat" type="button" id="caso2" value="Profundidade 12" onClick="casosTeste(2);">
+		<input class="but but-faccat" type="button" id="caso3" value="Profundidade 26" onClick="casosTeste(3);">
 	</div>
 
 	<div id="container">
@@ -47,14 +47,15 @@
 			</table>
 		</div>
 
-		<div id="quadroesq">
-			<div id="solucao" style="display:none">
-				Movimentos: <span id="movimentos"></span>
-				Nodos testados: <span id="nodos"></span> - Profundidade: <span id="profundidade"></span> (máx = <span id="aprofund"></span>)
-				Nodos na pilha/fila: <span id="tampilha"></span>
+		<div id="tabuleiro-puzzle">
+			<div id="solucao" class="solucaoPos" style="display:none;">
+				Movimentos: <span id="movimentos"></span><br>
+				Nodos testados: <span id="nodos"></span><br>
+				Profundidade: <span id="profundidade"></span> (máx = <span id="aprofund"></span>)<br>
+				Nodos na pilha/fila: <span id="tampilha"></span><br>
 				Tempo transcorrido: <span id="tempo"></span>
 				<div id="solucaoBotao">
-					<b>Ver solução:</b> <input class="but but-faccat" type="button" value=" Próximo passo " onClick="exibeSolucao();">
+					<input class="but but-faccat solucaoPos" type="button" value="Clique aqui para resolver passo-a-passo a solução encontrada" onClick="exibeSolucao();">
 				</div>
 			</div>
 		</div>

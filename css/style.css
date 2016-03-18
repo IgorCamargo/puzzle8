@@ -1,5 +1,5 @@
 body {
-	font: 13px Verdana;
+	font: 18px "Georgia";
 }
 h1 {
 	margin-bottom: 0;
@@ -17,9 +17,6 @@ h3 {
 }
 #tabuleiro-puzzle {
   width: 630px;
-}
-#quadroesq {
-  width: 400px;
 }
 #tabuleiro {
 	border-width: 1px;
@@ -75,22 +72,6 @@ h3 {
 	background-position: 5000px 5000px;
 	border-style: none;
 }
-.hint {
-	font: 11px Tahoma,Helvetica,Arial;
-	line-height: 18px;
-	padding: 10px;
-	border: 1px solid #000;
-	background-color: #ffe;
-	width: 300px;
-	height: auto;
-	margin-top: 10px;
-	position: absolute;
-}
-.info {
-	font: 11px Tahoma,Helvetica,Arial;
-	margin: 10px 0 20px 30px;
-	text-indent: -30px;
-}
 /* botões */
 .but {
 	display: inline-block;
@@ -116,7 +97,9 @@ h3 {
 .but-faccat:active {
 	background-color: #0000FF;
 }
-
+.solucaoPos {
+	margin-top: 25px;
+}
 .pos-esq {
 	position: absolute;
 	width: 200px;
