@@ -3,15 +3,17 @@ body {
 }
 h1 {
 	margin-bottom: 0;
-	font: 29px "arial black";
+	font: 25px "Georgia";
+	display: inline-block;
 }
 h3 {
 	margin-top: 0;
-	font: bold italic 18px arial;
+	font: bold 18px "Georgia";
+	display: inline-block;
 }
 #container {
-  width: 800px;
-  margin: 0 auto;
+  width: 630px;
+  margin: 10px auto;
 }
 #tabuleiro-puzzle {
   /*float: left;*/
