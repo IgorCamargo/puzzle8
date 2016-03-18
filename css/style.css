@@ -16,7 +16,7 @@ h3 {
 #tabuleiro-puzzle {
   /*float: left;*/
   /*margin-top: 100px;*/
-  width: 500px;
+  width: 630px;
 }
 #quadroesq {
   /*float: left;*/
@@ -31,7 +31,7 @@ h3 {
 }
 #tabuleiro td {
 	padding-right: 5px;
-	width: 171px;
+	width: 207px;
 	height: 180px;
 	font: 15px "arial black";
 	color: #fff;
@@ -46,29 +46,31 @@ h3 {
 	border-style: outset;
 	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 }
+
+/*-------------*/
 .c1 {
 	background-position: 0 0;
 }
 .c2 {
-	background-position: -105px 0;
+	background-position: -207px 2px;
 }
 .c3 {
-	background-position: -210px 0;
+	background-position: -414px 0;
 }
 .c4 {
-	background-position: 0 -105px;
+	background-position: 0 -180px;
 }
 .c5 {
-	background-position: -105px -105px;
+	background-position: -207px -180px;
 }
 .c6 {
-	background-position: -210px -105px;
+	background-position: -414px -180px;
 }
 .c7 {
-	background-position: 0 -210px;
+	background-position: 0 -360px;
 }
 .c8 {
-	background-position: -105px -210px;
+	background-position: -207px -360px;
 }
 .c9 {
 	background-position: 5000px 5000px;
