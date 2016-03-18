@@ -22,9 +22,10 @@ var tempoInicio;	// para cálculo do tempo transcorrido na busca
 */
 
 // seleciona o método e inicia a busca
-//
-function buscaSolucao() {
-	var modo = document.getElementById("algoritmo").value;
+// function buscaSolucao() {
+function buscaSolucao(alg) {
+	// var modo = document.getElementById("algoritmo").value;
+	var modo = alg;
 	if (!modo)
 		return;
 	
