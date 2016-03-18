@@ -3,14 +3,27 @@
 <head>
 	<title>8-puzzle - Fundamentos de IA</title>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=0.5">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script type="text/javascript" src="js/puzzle.js"></script>
 </head>
 
 <body onLoad="exibeEstado(estado);">
 
-	<h1>Puzzle 9 - IA - </h1>
+	<h1>Puzzle 8 - IA - </h1>
 	<h3>Algoritmo A*</h3>
+
+	<div class="pos-esq">
+		<input class="but but-faccat" type="button" id="embaralha" value="Embaralha tabuleiro" onClick="embaralhaTabuleiro(estado,50,'');" onMouseOver="hints('hintEmbaralha');" onMouseOut="hints();">
+		<input class="but but-faccat" type="button" id="restaura" value="Restaura tabuleiro " onClick="restauraUltimo();" onMouseOver="hints('hintRestaura');" onMouseOut="hints();">
+		<input class="but but-faccat" type="button" id="busca" value="Busca solução " onClick="buscaSolucao('A2');" onMouseOver="hints('hintBusca');" onMouseOut="hints();">
+	</div>
+		
+	<div class="pos-dir" onMouseOver="hints('hintCasos');" onMouseOut="hints();">
+		<input class="but but-faccat" type="button" id="caso1" value=" Caso Teste 1" onClick="casosTeste(1);">
+		<input class="but but-faccat" type="button" id="caso2" value=" Caso Teste 2" onClick="casosTeste(2);">
+		<input class="but but-faccat" type="button" id="caso3" value=" Caso Teste 3" onClick="casosTeste(3);">
+	</div>
 
 	<div id="container">
 
@@ -35,40 +48,13 @@
 		</div>
 
 		<div id="quadroesq">
-			<form>
-				<input type="button" id="embaralha" value="Embaralha tabuleiro" onClick="embaralhaTabuleiro(estado,50,'');" onMouseOver="hints('hintEmbaralha');" onMouseOut="hints();">
-
-				<div id="hintEmbaralha" class="hint" style="display: none;">
-					Efetua 50 movimentos aleatórios a partir do estado atual do tabuleiro. Acione consecutivamente
-					para embaralhar mais.
-				</div>
-
-				<div style="margin-top: 15px;" onMouseOver="hints('hintCasos');" onMouseOut="hints();">
-					<input type="button" id="caso1" value=" Caso Teste 1" onClick="casosTeste(1);">
-					<input type="button" id="caso2" value=" Caso Teste 2" onClick="casosTeste(2);">
-					<input type="button" id="caso3" value=" Caso Teste 3" onClick="casosTeste(3);">
-				</div>
-
-				<input type="button" id="busca" value=" busca solução " onClick="buscaSolucao('A2');" onMouseOver="hints('hintBusca');" onMouseOut="hints();">
-
-				<div id="hintBusca" class="hint" style="display: none;">
-					Busca solução para a configuração atual do tabuleiro, utilizando o algoritmo selecionado acima.
-				</div>
-
-				<input type="button" id="restaura" value=" restaura tabuleiro " onClick="restauraUltimo();" onMouseOver="hints('hintRestaura');" onMouseOut="hints();">
-
-				<div id="hintRestaura" class="hint" style="display: none;">
-					Restaura a configuração do tabuleiro antes da última solução.
-				</div>
-			</form>
-
 			<div id="solucao" style="display:none">
 				Movimentos: <span id="movimentos"></span>
 				Nodos testados: <span id="nodos"></span> - Profundidade: <span id="profundidade"></span> (máx = <span id="aprofund"></span>)
 				Nodos na pilha/fila: <span id="tampilha"></span>
 				Tempo transcorrido: <span id="tempo"></span>
 				<div id="solucaoBotao">
-					<b>Ver solução:</b> <input type="button" value=" Próximo passo " onClick="exibeSolucao();">
+					<b>Ver solução:</b> <input class="but but-faccat" type="button" value=" Próximo passo " onClick="exibeSolucao();">
 				</div>
 			</div>
 		</div>

@@ -16,12 +16,9 @@ h3 {
   margin: 10px auto;
 }
 #tabuleiro-puzzle {
-  /*float: left;*/
-  /*margin-top: 100px;*/
   width: 630px;
 }
 #quadroesq {
-  /*float: left;*/
   width: 400px;
 }
 #tabuleiro {
@@ -93,4 +90,42 @@ h3 {
 	font: 11px Tahoma,Helvetica,Arial;
 	margin: 10px 0 20px 30px;
 	text-indent: -30px;
+}
+/* botões */
+.but {
+	display: inline-block;
+	background-color: #ccc;
+	color: #444;
+	padding: 10px 20px;
+	text-decoration: none;
+	box-sizing: border-box;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	border: 0px;
+}
+.but-faccat {
+	color: #fff;
+	margin-top: 50px;
+	background-color: #4169E1;
+	width: 100%;
+	height: 100px;
+}
+.but-faccat:hover {
+	background-color: #000080;
+}
+.but-faccat:active {
+	background-color: #0000FF;
+}
+
+.pos-esq {
+	position: absolute;
+	width: 200px;
+	display: block;
+	left: 0;
+}
+.pos-dir {
+	position: absolute;
+	width: 200px;
+	display: block;
+	right: 0;
 }
