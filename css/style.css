@@ -11,7 +11,7 @@ h3 {
 }
 #container {
   width: 800px;
-  margin: auto;
+  margin: 100px auto;
 }
 #quadroesq {
   float: left;
@@ -19,11 +19,12 @@ h3 {
 }
 #quadrodir {
   float: left;
+  /*margin-top: 100px;*/
   width: 400px;
 }
 #tabuleiro {
 	border-width: 1px;
-	border-spacing: 2px;
+	border-spacing: 0px;
 	border-style: inset;
 	border-color: gray;
 	border-collapse: separate;

@@ -26,13 +26,15 @@
 
 <body onLoad="exibeEstado(estado);">
 
+<h1>8-puzzle - Fundamentos de IA</h1>
+<h3>Um exercício com algoritmos de busca cega e heurística</h3>
+
 <div id="container">
   <!-- <div style="float:right"> -->
 	<!-- Google +1 button -->
 <!-- 	<g:plusone></g:plusone>
   </div> -->
-  <h1>8-puzzle - Fundamentos de IA</h1>
-  <h3>Um exercício com algoritmos de busca cega e heurística</h3>
+
   <div id="quadroesq">
     <table id="tabuleiro">
     <tr>
@@ -51,9 +53,9 @@
       <td id="p22" onClick="movePeca(this);"></td>
     </tr>
     </table>
-    <br>
+    <!-- <br>
     <p>Escolha a imagem do tabuleiro:</p>
-    <img src="img/cac2.jpg" title="Kim TaeYeon" width=100 onClick="trocaImagem(this.src);">
+    <img src="img/cac2.jpg" title="Kim TaeYeon" width=100 onClick="trocaImagem(this.src);"> -->
     <!-- <img src="snoopy-red-baron.jpg" title="The Flying Ace" width=100 onClick="trocaImagem(this.src);" hspace=5> -->
     <!-- <img src="apples.jpg" title="Apples" width=100 onClick="trocaImagem(this.src);"> -->
     <!-- <br><br> -->
@@ -63,7 +65,7 @@
   </div>
 
   <div id="quadrodir">
-    Embaralhe o tabuleiro e tente resolver o quebra-cabeça, ou crie um desafio para o programa! :)<br><br>
+    <!-- Embaralhe o tabuleiro e tente resolver o quebra-cabeça, ou crie um desafio para o programa! :)<br><br> -->
     <form>
 	  <input type="button" id="embaralha" value="Embaralha tabuleiro" onClick="embaralhaTabuleiro(estado,50,'');" onMouseOver="hints('hintEmbaralha');" onMouseOut="hints();">
 	  <div id="hintEmbaralha" class="hint" style="display: none;">
