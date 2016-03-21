@@ -13,9 +13,18 @@ var profundMax = 30;	// profundidade máxima a explorar na árvore - evita cair 
 var solucao = []; 	// array que conterá a seqüência de nodos até a solução
 var tempoInicio;	// para cálculo do tempo transcorrido na busca
 
+/* objeto nodo:
+
+	{ estado: array[3][3] de char
+	  profundidade: int,
+	  pai: ponteiro para nodo,
+	  valorf, valorg, valorh: int - somente no algoritmo A* }
+*/
 
 // seleciona o método e inicia a busca
-function buscaSolucao(alg) {			// passa como parametro 'A2', que corresponde ao algoritmo A*
+// function buscaSolucao() {
+function buscaSolucao(alg) {
+	// var modo = document.getElementById("algoritmo").value;
 	var modo = alg;
 	if (!modo)
 		return;
