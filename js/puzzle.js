@@ -29,9 +29,9 @@ function buscaSolucao(alg) {			// passa como parametro 'A2', que corresponde ao 
 	nodos = 0;
 	movimentos = 0;	// zera movimentos feitos pelo jogador
   
-	if (modo == "BAI")
+	/*if (modo == "BAI")
 		aprofundamentoIterativo(0);
-	else if (modo[0] == "A") {	// heurísticas do A*
+	else*/ if (modo[0] == "A") {	// heurísticas do A*
 		var nodo = {estado: estado, profundidade: 0, pai: null, valorf: 0, valorg: 0, valorh: 0};
 		nodo.valorh = calculaHeuristica(estado,modo);
 		nodo.valorf = nodo.valorh;
@@ -174,9 +174,9 @@ function calculaHeuristica(estado,modo) {
 	for (y=0; y<3; y++)
 		for(x=0; x<3; x++) {
 			if (estado[y][x] != meta[y][x] && estado[y][x] != "9") {	// verifica peças fora do lugar, sem contar o espaço em branco
-				if (modo == "A1") 			// heurística 1 - apenas conta quantas peças estão fora do lugar
+				/*if (modo == "A1") 			// heurística 1 - apenas conta quantas peças estão fora do lugar
 					n++;
-				else if (modo == "A2") {	// heurística 2 - calcula distância total das peças de suas posições corretas
+				else*/ if (modo == "A2") {	// heurística 2 - calcula distância total das peças de suas posições corretas
 					py = parseInt((estado[y][x]-1)/3);	// calcula linha correta, baseado no valor da peça
 					px = estado[y][x]-py*3-1;			// calcula coluna correta
 					d = Math.abs(x-px) + Math.abs(y-py);// Manhattan Distance
