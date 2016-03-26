@@ -49,18 +49,18 @@ function buscaSolucao(alg) {			// passa como parametro 'A2', que corresponde ao 
 
 // inicializa a busca por aprofundamento iterativo
 //
-function aprofundamentoIterativo(profundAtual) {
-	var nodo = {estado: estado, profundidade: 0, pai: null};
-	pilha = [];
-	pilha.push(nodo);
+// function aprofundamentoIterativo(profundAtual) {
+// 	var nodo = {estado: estado, profundidade: 0, pai: null};
+// 	pilha = [];
+// 	pilha.push(nodo);
   
-	profundAtual++;
-	document.getElementById("aprofund").innerHTML = profundAtual;
-	if (profundAtual < profundMax)
-		iteracaoBusca('BAI',profundAtual);
-	else
-		alert("Profundidade máxima atingida sem solução :/");
-}
+// 	profundAtual++;
+// 	document.getElementById("aprofund").innerHTML = profundAtual;
+// 	if (profundAtual < profundMax)
+// 		iteracaoBusca('BAI',profundAtual);
+// 	else
+// 		alert("Profundidade máxima atingida sem solução :/");
+// }
 
 
 // função que faz a busca na árvore, de acordo com o método selecionado
@@ -83,7 +83,7 @@ function iteracaoBusca(modo,pmax) {
 		profundidade = nodo.profundidade;
 		document.getElementById("profundidade").innerHTML = profundidade;
 		document.getElementById("nodos").innerHTML = nodos;
-		if (comparaEstados(estado,meta)) {
+		if (comparaEstados(estado,meta)) {								// compara se já atingiu a meta
 			calculaTempo();
 			alert("SOLUÇÃO ENCONTRADA!\n\nClique OK para aprender :P");
 			solucao.push(nodo.estado);	// reconstrói o caminho até o estado inicial
