@@ -33,9 +33,12 @@ function buscaSolucao(alg) {			// passa como parametro 'A2', que corresponde ao 
 		aprofundamentoIterativo(0);
 	else*/ if (modo[0] == "A") {	// heurísticas do A*
 		var nodo = {estado: estado, profundidade: 0, pai: null, valorf: 0, valorg: 0, valorh: 0};
-		nodo.valorh = calculaHeuristica(estado,modo);
+// valorh = valor da heristica
+// valorg = valor gerado
+// valorf = valor final
+		nodo.valorh = calculaHeuristica(estado,modo);	// 13
 		nodo.valorf = nodo.valorh;
-		pilha.push(nodo);
+		pilha.push(nodo);	// adiciona na pilha o nodo
 		document.getElementById("aprofund").innerHTML = profundMax;
 		iteracaoBusca(modo,profundMax);
 	}
@@ -114,7 +117,7 @@ function iteracaoBusca(modo,pmax) {
 
 // gera os filhos de um nodo
 //
-function geraFilhos(nodo,profundidade,modo) {
+function geraFilhos(nodo,profundidade,modo) {		// **************************
 	profundidade++;
 	
 	for (var i=0; i<3; i++)
@@ -148,7 +151,7 @@ function empilhaFilho(pai,profundidade,modo,io,jo,id,jd) {
 		if (procuraLista(fechados,estado))
 			return;		// se já está na lista de nodos analisados, sai sem fazer nada
 		valorg = pai.valorg + 1;
-		valorh = calculaHeuristica(estado,modo);
+		valorh = calculaHeuristica(estado,modo);			// CALCULA A HEURISTICA NOVAMENTE
 		valorf = valorg + valorh;
 		filho = {estado: estado, profundidade: profundidade, pai: pai, valorf: valorf, valorg: valorg, valorh: valorh};
 		i = procuraLista(pilha,estado);	// se estado já existe na lista de abertos, retorna indice do nodo correspondente
@@ -178,8 +181,9 @@ function calculaHeuristica(estado,modo) {
 					n++;
 				else*/ if (modo == "A2") {	// heurística 2 - calcula distância total das peças de suas posições corretas
 					py = parseInt((estado[y][x]-1)/3);	// calcula linha correta, baseado no valor da peça
-					px = estado[y][x]-py*3-1;			// calcula coluna correta
-					d = Math.abs(x-px) + Math.abs(y-py);// Manhattan Distance
+					px = estado[y][x]-py*3-1;			// calcula coluna correta 	py=2 px=0 x=2 y=1
+					d = Math.abs(x-px) + Math.abs(y-py);// Manhattan Distance	2-0=2 + 1-2=1 -> 3
+					// math.abs - retorna o valor sempre positivo
 					n += d;
 				}
 				else {
@@ -362,7 +366,8 @@ function restauraUltimo() {
 function casosTeste(n) {
 	switch (n) {
 		case 1:
-			estado = [["7","1","3"],["2","6","9"],["5","4","8"]];	// profundidade 11
+			// estado = [["7","1","3"],["2","6","9"],["5","4","8"]];	// profundidade 11
+			estado = [["5","8","3"],["2","4","9"],["1","6","7"]];
 			break;
 		case 2:
 			estado = [["4","2","3"],["6","9","1"],["7","5","8"]];	// profundidade 12
