@@ -1,5 +1,56 @@
 @media screen and (max-width: 1050px) {
+	.but {
+		padding: 0px 10px;
+	}
+	.but-faccat {
+		width: 150px;
+	}
+	.pos-esq {
+		position: absolute;
+		width: 150px;
+		display: block;
+		left: 0;
+	}
+	.pos-dir {
+		position: absolute;
+		width: 150px;
+		display: block;
+		right: 0;
+	}
+}
+
+@media screen and (max-width: 950px) {
 	h5 {
-		background-color: red;
+		font-size: 12px;
+	}
+	#container {
+		margin: 70px auto;
+	}
+	.but {
+		font-size: 12px;
+		padding: 0px 0px;
+	}
+	.but-faccat {
+		margin-top: 5px;
+		height: 60px;
+		width: 120px;
+	}
+	.pos-esq {
+		position: absolute;
+		width: 370px;
+		display: block;
+		left: 0;
+	}
+	.pos-dir {
+		position: absolute;
+		width: 370px;
+		display: block;
+		right: 0;
+	}
+}
+
+@media screen and (max-width: 760px) {
+	h5 {
+		background-color: black;
 	}
 }
