@@ -259,7 +259,7 @@ function movePeca(elemento) {
 		document.getElementById("movimentos").innerHTML = movimentos;
 		exibeEstado(estado);
 		if (comparaEstados(estado,meta)) {
-			alert("Resolvido em "+movimentos+" movimentos. Parabéns!");
+			alert("Resolvido em "+movimentos+" movimentos. Parabéns!"); 
 			movimentos = 0;
 		}
 	}
