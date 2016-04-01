@@ -1,53 +1,51 @@
-var meta =[	["1","2","3"],	// estado objetivo
+var meta =[	["1","2","3"],
             ["4","5","6"],
-            ["7","8","9"] ];
-				
-var estado = copiaEstado(meta);	// estado do tabuleiro na tela - inicializa com o estado meta
-var ultimo = copiaEstado(meta);	// guarda o estado antes da solução
-var movimentos = 0;	// movimentos realizados pelo jogador (humano)
+            ["7","8","9"] ];											// estado objetivo, puzzle montado
 
-var pilha = []; 	// array de objetos tipo nodo
-var fechados = [];	// array dos nodos já avaliados (para o A*)
-var nodos = 0;		// quantidade de nodos visitados
-var profundMax = 30;	// profundidade máxima a explorar na árvore - evita cair em ramos infinitos na busca cega
-var solucao = []; 	// array que conterá a seqüência de nodos até a solução
-var tempoInicio;	// para cálculo do tempo transcorrido na busca
+var estado = copiaEstado(meta);											// estado do tabuleiro na tela - inicializa com o estado meta
+var ultimo = copiaEstado(meta);											// guarda o estado antes da solução
+var movimentos = 0;														// movimentos realizados pelo jogador (humano)
+
+var pilha = [];															// array de objetos tipo nodo
+var fechados = [];														// array dos nodos já avaliados
+var nodos = 0;															// quantidade de nodos visitados
+var profundMax = 30;													// profundidade máxima a explorar na árvore - evita cair em ramos infinitos na busca cega
+var solucao = [];														// array que conterá a seqüência de nodos até a solução
+var tempoInicio;														// para cálculo do tempo transcorrido na busca
 
 
 // seleciona o método e inicia a busca
-function buscaSolucao(alg) {			// passa como parametro 'A2', que corresponde ao algoritmo A*
+function buscaSolucao(alg) {											// passa como parametro 'A2', que corresponde ao algoritmo A*
 	var modo = alg;
 	if (!modo)
-		return;
+		return;															// verifica se o método for nulo
 	
-	ultimo = copiaEstado(estado);	// salva o estado atual do tabuleiro
+	ultimo = copiaEstado(estado);										// salva o estado atual do tabuleiro
 	desativaBotoes();
 	tempoInicio = new Date().getTime();
 	pilha = [];
 	fechados = [];
 	solucao = [];
 	nodos = 0;
-	movimentos = 0;	// zera movimentos feitos pelo jogador
+	movimentos = 0;														// zera movimentos feitos pelo jogador
   
-	/*if (modo == "BAI")
-		aprofundamentoIterativo(0);
-	else*/ if (modo[0] == "A") {	// heurísticas do A*
+	if (modo[0] == "A") {										// heurísticas do A*
 		var nodo = {estado: estado, profundidade: 0, pai: null, valorf: 0, valorg: 0, valorh: 0};
 // valorh = valor da heristica
 // valorg = valor gerado
 // valorf = valor final
-		nodo.valorh = calculaHeuristica(estado,modo);	// 13
+		nodo.valorh = calculaHeuristica(estado,modo);					// nodo.valorh recebe o cálculo da heurística A* - Manhattan Distance
 		nodo.valorf = nodo.valorh;
-		pilha.push(nodo);	// adiciona na pilha o nodo
+		pilha.push(nodo);												// adiciona na pilha o nodo avaliado
 		document.getElementById("aprofund").innerHTML = profundMax;
-		iteracaoBusca(modo,profundMax);
+		iteracaoBusca(modo,profundMax);									// retorna a busca na árvore do "melhor caminho"
 	}
-	else {
-		var nodo = {estado: estado, profundidade: 0, pai: null};
-		pilha.push(nodo);
-		document.getElementById("aprofund").innerHTML = profundMax;
-		iteracaoBusca(modo,profundMax);
-	}
+	// else {
+	// 	var nodo = {estado: estado, profundidade: 0, pai: null};
+	// 	pilha.push(nodo);
+	// 	document.getElementById("aprofund").innerHTML = profundMax;
+	// 	iteracaoBusca(modo,profundMax);
+	// }
 }
 
 // inicializa a busca por aprofundamento iterativo
@@ -66,48 +64,48 @@ function buscaSolucao(alg) {			// passa como parametro 'A2', que corresponde ao 
 // }
 
 
-// função que faz a busca na árvore, de acordo com o método selecionado
-//
+// função que faz a busca na árvore, de acordo com o método selecionado, neste caso A*
 function iteracaoBusca(modo,pmax) {
 	var nodo = {};
 	var profundidade, i;
   
 	while (pilha.length) {
 		document.getElementById("tampilha").innerHTML = pilha.length;	// exibe tamanho da pilha/fila
-		if (modo[0] == "A" || modo == "BA") // A* ou Busca em Amplitude
-			nodo = pilha.shift();			// remove do inicio, funciona como fila
-		else					// Busca em Profundidade ou Aprofundamento Iterativo
-			nodo = pilha.pop();	// remove do fim, funciona como pilha
+		if (modo[0] == "A") 											// A*
+			nodo = pilha.shift();										// remove do inicio, funciona como fila
+		// else							// Busca em Profundidade ou Aprofundamento Iterativo
+		// 	nodo = pilha.pop();	// remove do fim, funciona como pilha
 		nodos++;
-		if (modo[0] == "A") 		// A*
-			fechados.push(nodo);	// coloca nodo na lista de nodos já avaliados
+		if (modo[0] == "A")												// A*
+			fechados.push(nodo);										// coloca nodo na lista de nodos já avaliados
 
 		estado = nodo.estado;
 		profundidade = nodo.profundidade;
 		document.getElementById("profundidade").innerHTML = profundidade;
 		document.getElementById("nodos").innerHTML = nodos;
-		if (comparaEstados(estado,meta)) {								// compara se já atingiu a meta
+
+		if (comparaEstados(estado,meta)) {								// compara se o estado do tabuleiro já atingiu a meta
 			calculaTempo();
 			alert("SOLUÇÃO ENCONTRADA!\n\nClique OK para aprender :P");
-			solucao.push(nodo.estado);	// reconstrói o caminho até o estado inicial
+			solucao.push(nodo.estado);									// reconstrói o caminho até o estado inicial
 			while (nodo.pai) {
 				nodo = nodo.pai;
 				solucao.push(nodo.estado);
 			}
-			estado = solucao.pop();	// retira o último estado empilhado (estado inicial)
-			exibeEstado(estado);	// volta o tabuleiro ao estado inicial
-			document.getElementById("solucao").style.display = ''; // exibe dados da solução
+			estado = solucao.pop();										// retira o último estado empilhado (estado inicial)
+			exibeEstado(estado);										// volta o tabuleiro ao estado inicial
+			document.getElementById("solucao").style.display = '';		// exibe dados da solução
 			document.getElementById("solucaoBotao").style.display = '';
 			return;
 		}
-		else {
-			if (profundidade < pmax)
-				geraFilhos(nodo,profundidade,modo);
+		else {															// se não se atingiu a meta
+			if (profundidade < pmax)									// verifica se a profundidade não ultrapassou o limite de 30 (profundMax = 30)
+				geraFilhos(nodo,profundidade,modo);						// e se não ultrapassou, gera filhos
 		}
-	} // end while
+	}
 
-	if (modo == 'BAI')					// se está em aprofundamento iterativo
-		aprofundamentoIterativo(pmax);	// recomeça para tentar com uma profundidade maior
+	// if (modo == 'BAI')					// se está em aprofundamento iterativo
+	// 	aprofundamentoIterativo(pmax);	// recomeça para tentar com uma profundidade maior
 	else
 		alert("Profundidade máxima atingida sem solução :/");			// senão, termina
 
@@ -116,50 +114,46 @@ function iteracaoBusca(modo,pmax) {
 
 
 // gera os filhos de um nodo
-//
-function geraFilhos(nodo,profundidade,modo) {		// **************************
+function geraFilhos(nodo,profundidade,modo) {
 	profundidade++;
-	
-	for (var i=0; i<3; i++)
-		for (var j=0; j<3; j++) 
-			if (nodo.estado[i][j] == "9") {  // localiza o espaço em branco
-        
-				// gera os filhos possíveis e coloca na pilha
-				if (i > 0)
-					empilhaFilho(nodo,profundidade,modo,i,j,i-1,j);   // move o branco para cima
-				if (i < 2)
-					empilhaFilho(nodo,profundidade,modo,i,j,i+1,j);   // move o branco para baixo
-				if (j > 0)
-					empilhaFilho(nodo,profundidade,modo,i,j,i,j-1);   // move o branco para a esquerda
-				if (j < 2)
-					empilhaFilho(nodo,profundidade,modo,i,j,i,j+1);   // move o branco para a direita
 
-				return; // encerra, nao precisa terminar os loops
-			} // end if
+	for (var i=0; i<3; i++)
+		for (var j=0; j<3; j++)
+			if (nodo.estado[i][j] == "9") {								// localiza o espaço em branco        
+// gera os filhos possíveis e coloca na pilha
+				if (i > 0)
+					empilhaFilho(nodo,profundidade,modo,i,j,i-1,j);		// move o branco para cima
+				if (i < 2)
+					empilhaFilho(nodo,profundidade,modo,i,j,i+1,j);		// move o branco para baixo
+				if (j > 0)
+					empilhaFilho(nodo,profundidade,modo,i,j,i,j-1);		// move o branco para a esquerda
+				if (j < 2)
+					empilhaFilho(nodo,profundidade,modo,i,j,i,j+1);		// move o branco para a direita
+				return;													// encerra, nao precisa terminar os loops
+			}
 }
 
 
 // cria nodo e adiciona-o à fila/pilha
-//
 function empilhaFilho(pai,profundidade,modo,io,jo,id,jd) {
 	var filho, estado, valorg, valorf, valorh, i;
 
-	estado = copiaEstado(pai.estado);
+	estado = copiaEstado(pai.estado);									// salva o estado pai antes de mover
 	trocaPeca(estado,io,jo,id,jd);
 
-	if (modo[0] == "A") {	// A*
-		if (procuraLista(fechados,estado))
-			return;		// se já está na lista de nodos analisados, sai sem fazer nada
+	if (modo[0] == "A") {												// A*
+		if (procuraLista(fechados,estado))								// se já está na lista de nodos analisados, sai sem fazer nada
+			return;
 		valorg = pai.valorg + 1;
-		valorh = calculaHeuristica(estado,modo);			// CALCULA A HEURISTICA NOVAMENTE
+		valorh = calculaHeuristica(estado,modo);						// calcula a heuristica do estado filho
 		valorf = valorg + valorh;
 		filho = {estado: estado, profundidade: profundidade, pai: pai, valorf: valorf, valorg: valorg, valorh: valorh};
-		i = procuraLista(pilha,estado);	// se estado já existe na lista de abertos, retorna indice do nodo correspondente
+		i = procuraLista(pilha,estado);									// se estado já existe na lista de abertos, retorna indice do nodo correspondente
 		if (i != null) {
-			if (pilha[i].valorg <= valorg)	// custo do nodo na lista é menor/igual ao do gerado agora
-				return;	// sai sem colocar o filho gerado na lista
+			if (pilha[i].valorg <= valorg)								// compara se a heurítica do estado do melhor nodo é melhor que a do nodo atual
+				return;													// sai sem colocar o filho gerado na lista
 			else
-				pilha.splice(i,1);	// remove o nodo antigo da lista
+				pilha.splice(i,1);										// senão, remove o nodo antigo da lista
 		}
 		insereFilaPrioridade(filho);	// adiciona o filho gerado à fila de prioridade
 	}
