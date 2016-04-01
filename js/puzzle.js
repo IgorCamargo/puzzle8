@@ -320,8 +320,7 @@ function comparaEstados(estado1,estado2) {								// compara estados
 }
 
 function restauraUltimo() {												// restaura tabuleiro
-	estado = meta;
-	exibeEstado(estado);
+	exibeEstado(meta);
 }
 
 function casosTeste(n) {
