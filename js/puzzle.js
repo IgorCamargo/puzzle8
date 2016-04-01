@@ -1,3 +1,4 @@
+// código modificado para melhor entendimento a partir: http://henriquevianna.com/code/ia/8puzzle.html
 var meta =[	["1","2","3"],
             ["4","5","6"],
             ["7","8","9"] ];											// estado objetivo, puzzle montado
