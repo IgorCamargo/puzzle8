@@ -103,12 +103,6 @@ function iteracaoBusca(modo,pmax) {
 				geraFilhos(nodo,profundidade,modo);						// e se não ultrapassou, gera filhos
 		}
 	}
-
-	// if (modo == 'BAI')					// se está em aprofundamento iterativo
-	// 	aprofundamentoIterativo(pmax);	// recomeça para tentar com uma profundidade maior
-	else
-		alert("Profundidade máxima atingida sem solução :/");			// senão, termina
-
 	ativaBotoes();
 }
 
@@ -116,10 +110,10 @@ function iteracaoBusca(modo,pmax) {
 // gera os filhos de um nodo
 function geraFilhos(nodo,profundidade,modo) {
 	profundidade++;
-
+	
 	for (var i=0; i<3; i++)
-		for (var j=0; j<3; j++)
-			if (nodo.estado[i][j] == "9") {								// localiza o espaço em branco        
+		for (var j=0; j<3; j++) 
+			if (nodo.estado[i][j] == "9") {								// localiza o espaço em branco
 // gera os filhos possíveis e coloca na pilha
 				if (i > 0)
 					empilhaFilho(nodo,profundidade,modo,i,j,i-1,j);		// move o branco para cima
@@ -129,7 +123,8 @@ function geraFilhos(nodo,profundidade,modo) {
 					empilhaFilho(nodo,profundidade,modo,i,j,i,j-1);		// move o branco para a esquerda
 				if (j < 2)
 					empilhaFilho(nodo,profundidade,modo,i,j,i,j+1);		// move o branco para a direita
-				return;													// encerra, nao precisa terminar os loops
+
+				return; // encerra, nao precisa terminar os loops
 			}
 }
 
@@ -138,47 +133,44 @@ function geraFilhos(nodo,profundidade,modo) {
 function empilhaFilho(pai,profundidade,modo,io,jo,id,jd) {
 	var filho, estado, valorg, valorf, valorh, i;
 
-	estado = copiaEstado(pai.estado);									// salva o estado pai antes de mover
+	estado = copiaEstado(pai.estado);
 	trocaPeca(estado,io,jo,id,jd);
 
 	if (modo[0] == "A") {												// A*
-		if (procuraLista(fechados,estado))								// se já está na lista de nodos analisados, sai sem fazer nada
-			return;
+		if (procuraLista(fechados,estado))
+			return;														// se já está na lista de nodos analisados, sai sem fazer nada
 		valorg = pai.valorg + 1;
-		valorh = calculaHeuristica(estado,modo);						// calcula a heuristica do estado filho
+		valorh = calculaHeuristica(estado,modo);						// calcula a herística do estado do nodo
 		valorf = valorg + valorh;
 		filho = {estado: estado, profundidade: profundidade, pai: pai, valorf: valorf, valorg: valorg, valorh: valorh};
 		i = procuraLista(pilha,estado);									// se estado já existe na lista de abertos, retorna indice do nodo correspondente
 		if (i != null) {
-			if (pilha[i].valorg <= valorg)								// compara se a heurítica do estado do melhor nodo é melhor que a do nodo atual
+			if (pilha[i].valorg <= valorg)								// compara se a heuristica do estado do nodo pai é melhor ou igual à do estado do nodo filho
 				return;													// sai sem colocar o filho gerado na lista
 			else
-				pilha.splice(i,1);										// senão, remove o nodo antigo da lista
+				pilha.splice(i,1);										// remove o nodo antigo da lista
 		}
-		insereFilaPrioridade(filho);	// adiciona o filho gerado à fila de prioridade
+		insereFilaPrioridade(filho);									// adiciona o filho gerado à fila de prioridade
 	}
-	else // outros algoritmos
-		pilha.push({estado: estado, profundidade: profundidade, pai: pai}); // coloca filho na pilha/lista
 }
 
 
 // função heurística utilizada pelo A*
-//
 function calculaHeuristica(estado,modo) {
 	var x,y,n,d,py,px;
-	
+
 	n = 0;
 	for (y=0; y<3; y++)
 		for(x=0; x<3; x++) {
-			if (estado[y][x] != meta[y][x] && estado[y][x] != "9") {	// verifica peças fora do lugar, sem contar o espaço em branco
-				/*if (modo == "A1") 			// heurística 1 - apenas conta quantas peças estão fora do lugar
-					n++;
-				else*/ if (modo == "A2") {	// heurística 2 - calcula distância total das peças de suas posições corretas
-					py = parseInt((estado[y][x]-1)/3);	// calcula linha correta, baseado no valor da peça
-					px = estado[y][x]-py*3-1;			// calcula coluna correta 	py=2 px=0 x=2 y=1
-					d = Math.abs(x-px) + Math.abs(y-py);// Manhattan Distance	2-0=2 + 1-2=1 -> 3
-					// math.abs - retorna o valor sempre positivo
-					n += d;
+			if (estado[y][x] != meta[y][x] && estado[y][x] != "9") {
+// verifica peças fora do lugar, sem contar o espaço em branco
+// dado que y é a linha e x é a coluna
+				if (modo == "A2") {										// calcula distância total das peças de suas posições corretas
+					py = parseInt((estado[y][x]-1)/3);					// py recebe a linha correta da peça avaliada, conforme o seu valor
+					px = estado[y][x]-py*3-1;							// py recebe a coluna correta da peça avaliada, conforme o seu valor
+					d = Math.abs(x-px) + Math.abs(y-py);				// d recebe a quantidade de movimentos (distância) até sua posição da meta - Manhattan Distance
+// math.abs - retorna o valor sempre positivo
+					n += d;												// n acumula a soma da distância das peças
 				}
 				else {
 					alert("Erro na chamada - heurística inválida!");
@@ -190,9 +182,7 @@ function calculaHeuristica(estado,modo) {
 	return n;
 }
 
-
 // exibe um passo da solução
-//
 function exibeSolucao() {
 	if (solucao.length) {
 		estado = solucao.pop();
@@ -201,80 +191,77 @@ function exibeSolucao() {
 		document.getElementById("movimentos").innerHTML = movimentos;
 	}
 	if (!solucao.length) {
-		document.getElementById("solucaoBotao").style.display = 'none'; // oculta botão para ver a solução
-		movimentos = 0;	// reseta contador de movimentos do jogador (mas não mostra na tela até que seja feita uma jogada)
+		document.getElementById("solucaoBotao").style.display = 'none';	// oculta botão para ver a solução
+		movimentos = 0;													// reseta contador de movimentos do jogador (mas não mostra na tela até que seja feita uma jogada)
 		ativaBotoes();
 	}
 }
 
-
 // embaralha tabuleiro
-//
 function embaralhaTabuleiro(estado,n,ultimo) {
 	var i,j,r,moveu;
-	
+
 	desativaBotoes();
 	if (n) {
 		loops:
 		for (var i=0; i<3; i++)
-			for (var j=0; j<3; j++) 
-				if (estado[i][j] == "9")   // localiza o espaço em branco
-					break loops;	// sai dos loops com o valor correto de i e j
-					
+			for (var j=0; j<3; j++)
+				if (estado[i][j] == "9")								// localiza o espaço em branco
+					break loops;										// sai dos loops com o valor correto de i e j
+
 		moveu = false;
 		while (!moveu) {
-			r = Math.floor(Math.random()*4);	// escolhe um movimento aleatório
+			r = Math.floor(Math.random()*4);							// escolhe um movimento aleatório
 			switch(r) {
 				case 0:
-					if (i > 0 && ultimo != "b") {	// testa se pode mover para cima
+					if (i > 0 && ultimo != "b") {						// testa se pode mover para cima
 						trocaPeca(estado,i,j,i-1,j);
 						ultimo = "c";
 						moveu = true;
 					}
 					break;
 				case 1:
-					if (i < 2 && ultimo != "c") {	// testa se pode mover para baixo
+					if (i < 2 && ultimo != "c") {						// testa se pode mover para baixo
 						trocaPeca(estado,i,j,i+1,j);
 						ultimo = "b";
 						moveu = true;
 					}
 					break;
 				case 2:
-					if (j > 0 && ultimo != "d") {	// testa se pode mover para a esquerda
+					if (j > 0 && ultimo != "d") {						// testa se pode mover para a esquerda
 						trocaPeca(estado,i,j,i,j-1);
 						ultimo = "e";
 						moveu = true;
 					}
 					break;
 				case 3:
-					if (j < 2 && ultimo != "e") {	// testa se pode mover para a direita
+					if (j < 2 && ultimo != "e") {						// testa se pode mover para a direita
 						trocaPeca(estado,i,j,i,j+1);
 						ultimo = "d";
 						moveu = true;
 					}
-			} // end switch
-		} // end while
-			
+			}
+		}
+
 		exibeEstado(estado);
 		n--;
 		window.setTimeout(function() { embaralhaTabuleiro(estado,n,ultimo) },100);  // nova iteração em 100ms
-	} // end if
+	}
 	else {
-		movimentos = 0;	// reseta os movimentos do jogador, pois o tabuleiro foi modificado
+		movimentos = 0;													// reseta os movimentos do jogador, pois o tabuleiro foi modificado
 		ativaBotoes();
 	}
 }
 
 
 // movimento do jogador (humano)
-//
 function movePeca(elemento) {
-	var i = Number(elemento.id.substr(1,1)); // pega linha a partir da id do elemento (ex. "p02")
-	var j = Number(elemento.id.substr(2,1)); // pega coluna a partir da id do elemento
+	var i = Number(elemento.id.substr(1,1));							// pega linha a partir da id do elemento (ex. "p02")
+	var j = Number(elemento.id.substr(2,1));							// pega coluna a partir da id do elemento
 	var novoi = i, novoj = j;
-  
-	// testa em qual direção a peça escolhida pode ser movida 
-	// o valor "9" indica o espaço em branco
+
+// testa em qual direção a peça escolhida pode ser movida 
+// o valor "9" indica o espaço em branco
 	if (i > 0 && estado[i-1][j] == "9")
 		novoi = i-1;
 	else if (i < 2 && estado[i+1][j] == "9")
@@ -307,7 +294,7 @@ function trocaPeca(estado,oi,oj,di,dj) {
 	estado[oi][oj] = t;
 }
 
-function insereFilaPrioridade(nodo) { // insere na fila, ordenado pelo valor f do nodo
+function insereFilaPrioridade(nodo) {									// insere na fila, ordenado pelo valor f do nodo
 
 	var i = 0;
 	var html = "";
@@ -315,18 +302,18 @@ function insereFilaPrioridade(nodo) { // insere na fila, ordenado pelo valor f d
 	while (i < pilha.length && parseInt(nodo.valorf) > parseInt(pilha[i].valorf))
 		i++;
 	if (i >= pilha.length)
-		pilha.push(nodo);		// insere no fim
+		pilha.push(nodo);												// insere no fim
 	else
-		pilha.splice(i,0,nodo);	// insere na posição i
+		pilha.splice(i,0,nodo);											// insere na posição i
 }
 
-function procuraLista(lista,estado) {
+function procuraLista(lista,estado) {									// procura se estado já foi avaliado
 	for (var i=0; i < lista.length; i++)
 		if (comparaEstados(estado,lista[i].estado))
 			return i;
 }
 
-function exibeEstado(estado) {	// exibe estado na tela
+function exibeEstado(estado) {											// exibe estado na tela
 	for (var i=0; i<3; i++)
 		for (var j=0; j<3; j++) {
 			elemento = document.getElementById("p"+i+j);
@@ -335,39 +322,38 @@ function exibeEstado(estado) {	// exibe estado na tela
 		}
 }
 
-function copiaEstado(estado) {	// retorna uma cópia do estado
+function copiaEstado(estado) {											// retorna uma cópia do estado
 	var retorno = [];
-	for (var i = 0; i < estado.length; i++)	// copia elementos do array
-		retorno[i] = estado[i].slice(0);		// necessário para evitar a cópia por referência
-    
+	for (var i = 0; i < estado.length; i++)								// copia elementos do array
+		retorno[i] = estado[i].slice(0);								// necessário para evitar a cópia por referência
+
 	return retorno;
 }
 
-function comparaEstados(estado1,estado2) {	// compara estados
+function comparaEstados(estado1,estado2) {								// compara estados
 	for (var i=0; i<3; i++)
 		for (var j=0; j<3; j++)
 			if (estado1[i][j] != estado2[i][j])
 				return false;
-				
+
 	return true;
 }
 
-function restauraUltimo() {
-	estado = copiaEstado(ultimo);
+function restauraUltimo() {												// restaura tabuleiro
+	estado = meta;
 	exibeEstado(estado);
 }
 
 function casosTeste(n) {
 	switch (n) {
 		case 1:
-			// estado = [["7","1","3"],["2","6","9"],["5","4","8"]];	// profundidade 11
-			estado = [["5","8","3"],["2","4","9"],["1","6","7"]];
+			estado = [["7","1","3"],["2","6","9"],["5","4","8"]];		// profundidade 11
 			break;
 		case 2:
-			estado = [["4","2","3"],["6","9","1"],["7","5","8"]];	// profundidade 12
+			estado = [["4","2","3"],["6","9","1"],["7","5","8"]];		// profundidade 12
 			break;
 		case 3:
-			estado = [["2","3","7"],["5","4","8"],["9","6","1"]];	// profundidade 26
+			estado = [["2","3","7"],["5","4","8"],["9","6","1"]];		// profundidade 26
 			break;
 	}
 	exibeEstado(estado);
@@ -380,7 +366,6 @@ function ativaBotoes(t) {
 function desativaBotoes(t) {
 	if (t == undefined) {
 		t = true;
-		hints();	// oculta todas as hints
 	}
 	document.getElementById("embaralha").disabled = t;
 	document.getElementById("busca").disabled = t;
@@ -391,7 +376,7 @@ function desativaBotoes(t) {
 }
 
 function calculaTempo() {
-	var tempo = new Date().getTime() - tempoInicio;	// calcula tempo transcorrido
+	var tempo = new Date().getTime() - tempoInicio;						// calcula tempo transcorrido
 	var tms = pad(tempo%1000,3);
 	tempo = Math.floor(tempo/1000);
 	var tseg = pad(tempo%60,2);
@@ -401,29 +386,10 @@ function calculaTempo() {
 	document.getElementById("tempo").innerHTML = pad(tempo,2)+":"+tmin+":"+tseg+"."+tms;
 }
 
-function pad(num,tam) {	// formata números com zeros à esquerda
+function pad(num,tam) {													// formata números com zeros à esquerda
 	var str = num.toString();
 	while (str.length < tam)
 		str = '0'+str;
-		
+
 	return str;
-}
-
-function trocaImagem(img) {
-	var elementos=document.getElementById("tabuleiro").getElementsByTagName("td");
-	for (var i=0; i < elementos.length; i++)
-		elementos[i].style.backgroundImage = "url("+img+")";
-}
-
-function hints(id) {
-	if (id) {
-		var elemento = document.getElementById(id);
-		elemento.style.display = '';
-	}
-	else {
-		var elementos = document.getElementsByTagName("div");
-		for (var i = 0; i < elementos.length; i++)
-			if (elementos[i].className == "hint")
-				elementos[i].style.display = 'none';
-	}
 }
