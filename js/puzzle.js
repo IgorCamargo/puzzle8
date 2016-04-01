@@ -29,7 +29,7 @@ function buscaSolucao(alg) {											// passa como parametro 'A2', que corresp
 	nodos = 0;
 	movimentos = 0;														// zera movimentos feitos pelo jogador
   
-	if (modo[0] == "A") {										// heurísticas do A*
+	if (modo[0] == "A") {												// heurísticas do A*
 		var nodo = {estado: estado, profundidade: 0, pai: null, valorf: 0, valorg: 0, valorh: 0};
 // valorh = valor da heristica
 // valorg = valor gerado
@@ -40,28 +40,7 @@ function buscaSolucao(alg) {											// passa como parametro 'A2', que corresp
 		document.getElementById("aprofund").innerHTML = profundMax;
 		iteracaoBusca(modo,profundMax);									// retorna a busca na árvore do "melhor caminho"
 	}
-	// else {
-	// 	var nodo = {estado: estado, profundidade: 0, pai: null};
-	// 	pilha.push(nodo);
-	// 	document.getElementById("aprofund").innerHTML = profundMax;
-	// 	iteracaoBusca(modo,profundMax);
-	// }
 }
-
-// inicializa a busca por aprofundamento iterativo
-//
-// function aprofundamentoIterativo(profundAtual) {
-// 	var nodo = {estado: estado, profundidade: 0, pai: null};
-// 	pilha = [];
-// 	pilha.push(nodo);
-  
-// 	profundAtual++;
-// 	document.getElementById("aprofund").innerHTML = profundAtual;
-// 	if (profundAtual < profundMax)
-// 		iteracaoBusca('BAI',profundAtual);
-// 	else
-// 		alert("Profundidade máxima atingida sem solução :/");
-// }
 
 
 // função que faz a busca na árvore, de acordo com o método selecionado, neste caso A*
